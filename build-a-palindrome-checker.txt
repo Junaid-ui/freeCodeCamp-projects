@@ -1,0 +1,106 @@
+** start of index.html **
+
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Palindrome checker</title>
+</head>
+<body>
+  <h2>Palindrome Checker</h2>
+  <input id="text-input" type="text" placeholder="Enter text to check" />
+  <button id="check-btn">check</button>
+  <p id="result" ></p>
+  <script src="./script.js" ></script>
+</body>
+
+** end of index.html **
+
+** start of styles.css **
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 40px;
+  max-width: 50px;
+  margin: auto;
+  color: #333
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"]{
+  width: 100px;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  display: block;            
+  width: 100%;               
+  padding: 12px 15px;        
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;         
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+** end of styles.css **
+
+** start of script.js **
+
+const isPalindrome = (str) => {
+  const cleaned = str.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+  const reversed = cleaned.split("").reverse().join("");
+  return cleaned === reversed;
+};
+
+const checkButton = document.getElementById("check-btn");
+
+checkButton.addEventListener("click", () => {
+  const inputElement = document.getElementById("text-input"); // fixed typo
+  const resultElement = document.getElementById("result");
+  const input = inputElement.value;
+
+  resultElement.classList.remove("success", "error");
+
+  if (input.trim() === "") {
+    alert("Please input a value"); // fixed typo in message
+    return;
+  }
+
+  const isPalin = isPalindrome(input); // fixed function name
+
+  const message = isPalin
+    ? `${input} is a palindrome.`
+    : `${input} is not a palindrome.`;
+
+  resultElement.textContent = message;
+  resultElement.classList.add(isPalin ? "success" : "error");
+});
+
+** end of script.js **
+
